@@ -21,7 +21,7 @@ import ConfirmPopup from "@/component/ConfirmPopup";
 import { useAppDispatch, useAppSelector } from "@/feature/Hooks";
 
 export default function Cart() {
-  const [orderList, setOrderList] = useState<any>([]);
+  const [orderList, setOrderList] = useState<String[]>([]);
   const dispatch = useAppDispatch()
   const { cart } = useContext(CartContext);
   const [total, setTotal] = useState<any>(0);
@@ -62,8 +62,22 @@ export default function Cart() {
     setOpenConfirmPopup(true);
   };
   useEffect(() => {
-    console.log(orderList)
-  }, [orderList])
+    if (cart !== null) {
+      // console.log(orderList)
+      // console.log(cart)
+      const totalCartItem = cart.productAndCartItemList.filter((cartItem: any) => 
+        orderList.includes(cartItem.cartItemId)
+      )
+      console.log(totalCartItem)
+      let total = 0
+      for (let index = 0; index < totalCartItem.length; index++) {
+        const element = totalCartItem[index];
+        total = total + element.quantity * element.product.price
+        console.log(total)
+      }
+      setTotal(total)
+    }
+  }, [orderList, cart])
   return (
     <CustomerLayout>
       <div
@@ -105,10 +119,10 @@ export default function Cart() {
               color="success"
                 onChange={(event) => {
                   if (event.target.checked) {
-                    setOrderList([...orderList, row]);
+                    setOrderList([...orderList, row.cartItemId]);
                   } else {
-                    // const newOrderList = orderList.filter((cartItems : any) => key !== cartItems)
-                    // setOrderList(newOrderList)
+                    const newOrderList = orderList.filter((cartItemId: any) => row.cartItemId !== cartItemId)
+                    setOrderList(newOrderList)
                   }
                 }}
               />
