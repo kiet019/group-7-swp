@@ -27,7 +27,7 @@ export default function ChangeQuatityButton({ cartItem, productQuantity }: any) 
         dispatch(
           setOpen({
             open: true,
-            message: "Adding success",
+            message: "Changing success",
             severity: "success",
           })
         );

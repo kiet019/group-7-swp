@@ -18,9 +18,9 @@ export default function Banner({ children }: any) {
         alt="green iguana"
         image={`/assets/images/${slider[index]}`}
         sx={{
-          height: "30rem",
+          width: "100%",
           marginTop: "12rem",
-          // objectFit: "contain"
+          objectFit: "contain"
         }}
       />
       <div style={{

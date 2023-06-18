@@ -34,7 +34,7 @@ export default function Address({setAddress} : any) {
         district !== null ? getWardOption(district.code) : null;
       }, [district])
       useEffect(() => {
-       ward !== null ? setAddress(`${ward.name}, ${district.name}, ${city.name}`) : null;
+       ward !== null ? setAddress(`Phường xã: ${ward.name}, Quận huyện: ${district.name},Thành phố: ${city.name}`) : null;
       }, [ward])
   return (
     <Grid container spacing={2} sx={{

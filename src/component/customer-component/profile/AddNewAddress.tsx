@@ -25,7 +25,7 @@ export default function AddNewAddress() {
   };
   const handleAddNewAddress = async () => {
     const response = await createAddressApi(
-      `${street}, ${address}`,
+      `Địa chỉ: ${street}, ${address}`,
       userBackend.userId
     );
     if (response) {

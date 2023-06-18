@@ -5,7 +5,8 @@ export const setup = {
     banner: "/assets/images/banner.jpg",
     error: "rgb(211, 47, 47)",
     success: "rgb(46, 125, 50)",
-    email: "cskg.tiemhommie@gmail.com"
+    email: "cskg.tiemhommie@gmail.com",
+    colorCode: "rgb(254, 175, 162)"
 }
 export const category = [
     { name: "Đồ chơi", url: ""},
