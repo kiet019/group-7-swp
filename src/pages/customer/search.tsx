@@ -10,7 +10,8 @@ import Loading from '@/component/Loading';
 
 export default function Search() {
     const router = useRouter();
-    const { productName, categoryId } = router.query
+    const { productName, categoryId } = router.query as {productName : string, categoryId : string}
+    console.log(productName)
     const [productList, setProductList] = useState<any>(null)
     useEffect(() => {
       const getProductListByName = async () => {

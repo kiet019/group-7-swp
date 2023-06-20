@@ -19,7 +19,7 @@ export default function Banner({ children }: any) {
         image={`/assets/images/${slider[index]}`}
         sx={{
           width: "100%",
-          marginTop: "12rem",
+          marginTop: "9.2rem",
           objectFit: "contain"
         }}
       />

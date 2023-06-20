@@ -1,4 +1,5 @@
 export const getProductListByNameApi = async (productName: any) => {
+  console.log(productName)
   const response = await fetch(
     `http://localhost:8080/api/product/searchByName?productName=${productName}`
   );

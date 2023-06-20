@@ -23,15 +23,41 @@ export default function CartTable({
         <TableHead>
           <TableRow>
             <TableCell width={470}>
-              <Typography variant="h5">Sản phẩm</Typography>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: "700",
+                }}
+              >
+                Sản phẩm
+              </Typography>
             </TableCell>
-            <TableCell width={120} align="center">
+            <TableCell
+              width={120}
+              sx={{
+                fontWeight: "700",
+              }}
+              align="center"
+            >
               Đơn giá
             </TableCell>
-            <TableCell width={170} align="center">
+            <TableCell
+              sx={{
+                fontWeight: "700",
+              }}
+              width={170}
+              align="center"
+            >
               Số Lượng
             </TableCell>
-            <TableCell align="center">Thành tiền</TableCell>
+            <TableCell
+              align="center"
+              sx={{
+                fontWeight: "700",
+              }}
+            >
+              Thành tiền
+            </TableCell>
             <TableCell></TableCell>
           </TableRow>
         </TableHead>
@@ -43,6 +69,7 @@ export default function CartTable({
                   <div
                     style={{
                       display: "flex",
+                      alignItems: "center",
                     }}
                   >
                     <Checkbox
@@ -56,6 +83,11 @@ export default function CartTable({
                           );
                           setOrderList(newOrderList);
                         }
+                      }}
+                      sx={{
+                        ":hover": {
+                          backgroundColor: "white",
+                        },
                       }}
                     />
                     <CardMedia

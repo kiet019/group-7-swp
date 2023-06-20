@@ -10,7 +10,7 @@ import { CartContext } from "./CartContext";
 export default function ChangeQuatityButton({ cartItem, productQuantity }: any) {
   const dispatch = useAppDispatch();
   const updateCartItemsQuantity = async (updateQuantity: any) => {
-    if( updateQuantity < 0 || updateQuantity > productQuantity) {
+    if( updateQuantity < 1 || updateQuantity > productQuantity) {
       dispatch(
         setOpen({
           open: true,
