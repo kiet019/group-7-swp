@@ -101,8 +101,8 @@ export default function Order() {
               </TableHead>
               <TableBody>
                 {cart !== null ? (
-                  orderList.map((row: any) => (
-                    <TableRow key={row.name}>
+                  orderList.map((row: any, index : any) => (
+                    <TableRow key={index}>
                       <TableCell component="th" scope="row">
                         <div
                           style={{
@@ -179,6 +179,7 @@ export default function Order() {
                   alignItems: "center",
                   height: "68px",
                 }}
+                key={key}
               >
                 <div>
                   <div
