@@ -1,28 +1,35 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Button, CardMedia, Checkbox, Typography } from "@mui/material";
 import Loading from "@/component/Loading";
-import ChangeQuatityButton from "./ChangeQuatityButton";
+import {
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  Typography,
+  TableBody,
+  CardMedia,
+} from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/component/customer-component/cart/CartContext";
+import { UserContext } from "@/component/login/AuthContext";
 
-export default function CartTable({
-  cart,
-  handleDelete,
-  setOrderList,
-  orderList,
-  setCartItemDelete,
-}: any) {
+export default function PreOrderTable({ orderIds }: any) {
+  const { cart } = useContext(CartContext);
+  const [orderList, setOrderList] = useState<any>([]);
+  const { user } = useContext(UserContext);
+  useEffect(() => {
+    const newOrderList = cart.productAndCartItemList.filter((cartItem: any) =>
+      orderIds.includes(cartItem.cartItemId)
+    );
+    setOrderList(newOrderList);
+  }, [user]);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell width={470}>
+            <TableCell width={350}>
               <Typography
                 variant="h5"
                 sx={{
@@ -33,41 +40,37 @@ export default function CartTable({
               </Typography>
             </TableCell>
             <TableCell
-              width={120}
+              width={80}
+              align="center"
               sx={{
                 fontWeight: "700",
-                color: "gray"
               }}
-              align="center"
             >
               Đơn giá
             </TableCell>
             <TableCell
               sx={{
                 fontWeight: "700",
-                color: "gray"
               }}
-              width={170}
+              width={80}
               align="center"
             >
-              Số lượng
+              Số Lượng
             </TableCell>
             <TableCell
               align="center"
               sx={{
                 fontWeight: "700",
-                color: "gray"
               }}
             >
               Thành tiền
             </TableCell>
-            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {cart !== null ? (
-            cart.productAndCartItemList.map((row: any, key : any) => (
-              <TableRow key={key}>
+            orderList.map((row: any, index: any) => (
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   <div
                     style={{
@@ -75,29 +78,11 @@ export default function CartTable({
                       alignItems: "center",
                     }}
                   >
-                    <Checkbox
-                      color="success"
-                      onChange={(event) => {
-                        if (event.target.checked) {
-                          setOrderList([...orderList, row.cartItemId]);
-                        } else {
-                          const newOrderList = orderList.filter(
-                            (cartItemId: any) => row.cartItemId !== cartItemId
-                          );
-                          setOrderList(newOrderList);
-                        }
-                      }}
-                      sx={{
-                        ":hover": {
-                          backgroundColor: "white",
-                        },
-                      }}
-                    />
                     <CardMedia
                       component="img"
                       sx={{
-                        width: "7rem",
-                        height: "5rem",
+                        width: "5rem",
+                        height: "4rem",
                         paddingRight: "2rem",
                       }}
                       src={"/assets/images/" + row.product.image}
@@ -107,7 +92,7 @@ export default function CartTable({
                         paddingRight: "1rem",
                       }}
                     >
-                      <Typography variant="h6">
+                      <Typography variant="body1">
                         {row.product.productName}
                       </Typography>
                     </div>
@@ -124,38 +109,19 @@ export default function CartTable({
                   </Typography>
                 </TableCell>
                 <TableCell align="right">
-                  <ChangeQuatityButton
-                    cartItem={row}
-                    productQuantity={row.product.quantity}
-                  />
                   <Typography
                     variant="subtitle2"
                     sx={{
                       textAlign: "center",
                     }}
                   >
-                    Còn lại: {row.product.quantity}
+                    {row.quantity}
                   </Typography>
                 </TableCell>
                 <TableCell align="right">
                   <Typography>
                     {formatNumber(row.product.price * row.quantity)} VND
                   </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Button
-                    color="error"
-                    variant="contained"
-                    onClick={() => {
-                      handleDelete();
-                      setCartItemDelete(row.cartItemId);
-                    }}
-                    sx={{
-                      margin: "1rem",
-                    }}
-                  >
-                    Xoá
-                  </Button>
                 </TableCell>
               </TableRow>
             ))

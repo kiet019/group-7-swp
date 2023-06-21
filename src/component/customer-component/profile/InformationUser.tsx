@@ -34,6 +34,7 @@ export default function InformationUser({ user, userBackend }: any) {
     const getAddress = async () => {
       const addressList = await getAddressByUserUidApi();
       setUserAddressList(addressList);
+      console.log(addressList)
     };
     getAddress();
   }, [user, alert]);

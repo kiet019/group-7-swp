@@ -1,11 +1,11 @@
 import { createTheme } from '@mui/material/styles';
 
-// Import các màu bạn muốn sử dụng
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#feAFA2', // Mã màu chủ đạo mới
+      main: '#feAFA2', 
+      // main: '#F6F9FC', 
     },
     secondary: {
       main: "rgb(25, 118, 210)"
@@ -13,7 +13,6 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Montserrat',
-    // Các tùy chỉnh kiểu chữ khác
   },
 });
 
