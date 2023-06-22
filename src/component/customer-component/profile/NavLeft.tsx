@@ -20,7 +20,7 @@ export default function NavLeft() {
       >
         Dashboard
       </Typography>
-      <MenuItem onClick={() => router.push("/customer/order")}>
+      <MenuItem onClick={() => router.push("/customer/profile/order")}>
         <ShoppingBagIcon
           sx={{
             marginRight: "1rem",

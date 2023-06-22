@@ -1,13 +1,5 @@
 import CustomerLayout from "@/layout/CustomerLayout";
-import {
-  Paper,
-  Typography,
-  Card,
-  Button,
-  Toolbar,
-  Box,
-
-} from "@mui/material";
+import { Paper, Typography, Card, Button, Toolbar, Box, CardMedia } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { CheckInView } from "@/checkInScreen";
 import { useContext, useEffect, useState } from "react";
@@ -74,77 +66,86 @@ export default function Cart() {
   }, [orderList, cart]);
   return (
     <CustomerLayout>
-        <div
-          style={{
-            display: "flex",
-            marginBottom: "1rem",
+      <div
+        style={{
+          display: "flex",
+          marginBottom: "1rem",
+        }}
+      >
+        <ShoppingCartOutlinedIcon
+          sx={{
+            width: "2rem",
+            height: "2rem",
+            marginRight: "0.5rem",
+            marginLeft: "0.5rem",
+          }}
+        />
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: "600",
           }}
         >
-          <ShoppingCartOutlinedIcon
-            sx={{
-              width: "2rem",
-              height: "2rem",
-              marginRight: "0.5rem",
-              marginLeft: "0.5rem",
-            }}
-          />
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: "600",
-            }}
-          >
-            Giỏ hàng
-          </Typography>
-        </div>
-        <Paper>
-          <CartTable
-            cart={cart}
-            handleDelete={handleDelete}
-            setOrderList={setOrderList}
-            orderList={orderList}
-            setCartItemDelete={setCartItemDelete}
-          />
-        </Paper>
-        
-        <CheckInView>
-          <Card
-            sx={{
-              marginTop: "2rem",
-              height: "fit-content",
-              padding: "1rem 0.5rem 1rem",
-            }}
-          >
-            <Toolbar>
-              <Box sx={{ flexGrow: 1 }} />
-              <Typography variant="body1">
-                Tổng tiền thanh toán:
-                <span style={{ marginLeft: "1rem", marginRight: "5rem" }}>
-                  {formatNumber(total)} VND
-                </span>
-              </Typography>
-              <Button
+          Giỏ hàng
+        </Typography>
+      </div>
+      {cart !== null ? (
+        cart.productAndCartItemList.length === 0 ? (
+          <CardMedia 
+          component="img"
+          src="/assets/images/no-cart.jpg"/>
+        ) : (
+          <>
+            <Paper>
+              <CartTable
+                cart={cart}
+                handleDelete={handleDelete}
+                setOrderList={setOrderList}
+                orderList={orderList}
+                setCartItemDelete={setCartItemDelete}
+              />
+            </Paper>
+            <CheckInView>
+              <Card
                 sx={{
-                  height: "4rem",
-                }}
-                color="success"
-                variant="contained"
-                disabled={orderList.length == 0}
-                type="submit"
-                onClick={() => {
-                  router.push(`order?orderIds=${orderList}&total=${total}`)
+                  marginTop: "2rem",
+                  height: "fit-content",
+                  padding: "1rem 0.5rem 1rem",
                 }}
               >
-                Thanh toán
-              </Button>
-            </Toolbar>
-          </Card>
-        </CheckInView>
-        <ConfirmPopup
-          setOpenConfirmPopup={setOpenConfirmPopup}
-          openConfirmPopup={openConfirmPopup}
-          setAgree={setAgree}
-        />
+                <Toolbar>
+                  <Box sx={{ flexGrow: 1 }} />
+                  <Typography variant="body1">
+                    Tổng tiền thanh toán:
+                    <span style={{ marginLeft: "1rem", marginRight: "5rem" }}>
+                      {formatNumber(total)} VND
+                    </span>
+                  </Typography>
+                  <Button
+                    sx={{
+                      height: "4rem",
+                    }}
+                    color="success"
+                    variant="contained"
+                    disabled={orderList.length == 0}
+                    type="submit"
+                    onClick={() => {
+                      router.push(`order?orderIds=${orderList}&total=${total}`);
+                    }}
+                  >
+                    Thanh toán
+                  </Button>
+                </Toolbar>
+              </Card>
+            </CheckInView>
+          </>
+        )
+      ) : null}
+      <ConfirmPopup
+        setOpenConfirmPopup={setOpenConfirmPopup}
+        openConfirmPopup={openConfirmPopup}
+        setAgree={setAgree}
+      />
     </CustomerLayout>
   );
 }

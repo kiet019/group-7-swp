@@ -33,3 +33,12 @@ export const makeOrder = async (
     return false;
   }
 };
+export const getOrderByUserIdApi =async (userId : any) => {
+  const response = await fetch(`http://localhost:8080/api/order/getOrderAndOrderItemByUserId?userId=${userId}`)
+  if (response.ok) {
+    const data : any = await response.json()
+    return data
+  } else {
+    return []
+  }
+}

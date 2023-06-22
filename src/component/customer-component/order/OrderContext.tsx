@@ -1,7 +1,7 @@
 import { UserContext } from "@/component/login/AuthContext";
 import { setOpen } from "@/feature/Alert";
 import { useAppDispatch, useAppSelector } from "@/feature/Hooks";
-import { makeOrder } from "@/pages/api/OrderApi";
+import { getOrderByUserIdApi, makeOrder } from "@/pages/api/OrderApi";
 import { useRouter } from "next/router";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -26,8 +26,8 @@ export default function OrderProvider({ children }: any) {
   const order = currentOrder;
   const router = useRouter()
   const getOrder = async () => {
-    // const response = await getOrderProductByUserUidApi();
-    // setCurrentOrder(response);
+    const response = await getOrderByUserIdApi(userBackend.userId);
+    setCurrentOrder(response);
   };
   const createOrder = async (
     userId: any,
