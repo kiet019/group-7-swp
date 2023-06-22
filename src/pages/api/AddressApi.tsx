@@ -1,13 +1,7 @@
 import { auth } from "@/config/firebase";
 
 export const getAddressByUserUidApi = async() => {
-    const response = await fetch("http://localhost:8080/api/address/getAddressByUserUid", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          "userUid" : auth.currentUser?.uid as string
-        },
-    })
+    const response = await fetch(`http://localhost:8080/api/address/getAddressByUserUid?userUid=${auth.currentUser?.uid}`)
     if (response.ok) {
         const addressList: any = await response.json()
         return addressList;
