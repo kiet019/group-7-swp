@@ -55,8 +55,8 @@ export default function OrderTable({ order }: any) {
               <TableRow key={row.orderId}>
                 <TableCell>{row.orderId}</TableCell>
                 <TableCell>
-                    {row.productAndOrderItemList.map((item : any) => (
-                        <Typography>{item.quantity} x {item.product.productName}</Typography>
+                    {row.productAndOrderItemList.map((item : any, key : any) => (
+                        <Typography key={key}>{item.quantity} x {item.product.productName}</Typography>
                     ))}
                 </TableCell>
                 <TableCell>{row.payment.paymentType}</TableCell>
