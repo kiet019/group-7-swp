@@ -10,14 +10,14 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { setup } from "../../config/setup";
 import { Button, Container, Grid, Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
-import WidgetsIcon from '@mui/icons-material/Widgets';
+import WidgetsIcon from "@mui/icons-material/Widgets";
 import { UserContext } from "../login/AuthContext";
 import { useContext } from "react";
 import SearchBox from "./navigation/SearchBox";
 import CartButton from "./cart/CartButton";
 export default function UserNavigation({ categoryList }: any) {
-  const { logout, user } = useContext(UserContext)
-  const settings = ['Profile', 'Logout'];
+  const { logout, user } = useContext(UserContext);
+  const settings = ["Profile", "Logout"];
   const router = useRouter();
   const navItem = [
     { name: "about", url: "" },
@@ -25,7 +25,6 @@ export default function UserNavigation({ categoryList }: any) {
   ];
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
 
   const handleOpenUserMenu = (event: any) => {
     setAnchorElUser(event.currentTarget);
@@ -52,9 +51,9 @@ export default function UserNavigation({ categoryList }: any) {
             fontWeight: "700",
             fontSize: "medium",
           },
-          "& .MuiButtonBase-root:hover": {  
+          "& .MuiButtonBase-root:hover": {
             backgroundColor: "inherit",
-            border: "none"
+            border: "none",
           },
         }}
       >
@@ -71,11 +70,13 @@ export default function UserNavigation({ categoryList }: any) {
                 component="div"
                 sx={{
                   display: {
-                    xs: "none", sm: "block", cursor: "pointer",
-                    letterSpacing: '.1rem',
+                    xs: "none",
+                    sm: "block",
+                    cursor: "pointer",
+                    letterSpacing: ".1rem",
                   },
                   paddingRight: "2rem",
-                  fontFamily: 'Roboto Serif'
+                  fontFamily: "Roboto Serif",
                 }}
                 onClick={() => {
                   router.push("/customer");
@@ -88,18 +89,20 @@ export default function UserNavigation({ categoryList }: any) {
                 component="div"
                 sx={{
                   display: {
-                    xs: "none", sm: "block", cursor: "pointer",
-                    letterSpacing: '.1rem',
+                    xs: "none",
+                    sm: "block",
+                    cursor: "pointer",
+                    letterSpacing: ".1rem",
                     textAlign: "center",
-                    fontFamily: 'Charm',
+                    fontFamily: "Charm",
                     fontWeight: "550",
-                  }
+                  },
                 }}
               >
                 Decoration and Gift
               </Typography>
             </div>
-            <SearchBox/>
+            <SearchBox />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               {navItem.map((item, key) => (
                 <Button key={key}>{item.name}</Button>
@@ -110,47 +113,53 @@ export default function UserNavigation({ categoryList }: any) {
                     router.push("/login");
                   }}
                   sx={{
-                    transform: "scale(1.2)"
+                    transform: "scale(1.2)",
                   }}
                 >
                   Login
                 </Button>
               ) : (
                 <>
-                  <CartButton/>
+                  <CartButton />
                   <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, margin: "0 1rem",
-                      transform: "scale(1.3)" }}>
-                <AccountCircle />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting}onClick={() => {
-                  handleCloseUserMenu()
-                  setting === "Logout" ? logout() : null
-                  setting === "Profile" ? router.push("/customer/profile") : null
-                }}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                    <IconButton
+                      onClick={handleOpenUserMenu}
+                      sx={{ p: 0, margin: "0 1rem", transform: "scale(1.3)" }}
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem
+                        key={setting}
+                        onClick={() => {
+                          handleCloseUserMenu();
+                          setting === "Logout" ? logout() : null;
+                          setting === "Profile"
+                            ? router.push("/customer/profile")
+                            : null;
+                        }}
+                      >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
                 </>
               )}
             </Box>
@@ -166,22 +175,26 @@ export default function UserNavigation({ categoryList }: any) {
             <Grid container spacing={0}>
               <Grid item xs={2.2}>
                 <Button fullWidth>
-                  <WidgetsIcon sx={{
-                  }} />Danh mục
+                  <WidgetsIcon />
+                  Danh mục
                 </Button>
               </Grid>
-              {categoryList != null ? categoryList.map((item: any) => (
-                <Grid item xs={2.4} key={item.categoryId}>
-                  <Button
-                     fullWidth
-                    onClick={() => {
-                      router.push(`/customer/search?categoryId=${item.categoryId}`);
-                    }}
-                  >
-                    {item.categoryName}
-                  </Button>
-                </Grid>
-              )) : null}
+              {categoryList != null
+                ? categoryList.map((item: any) => (
+                    <Grid item xs={2.4} key={item.categoryId}>
+                      <Button
+                        fullWidth
+                        onClick={() => {
+                          router.push(
+                            `/customer/search?categoryId=${item.categoryId}`
+                          );
+                        }}
+                      >
+                        {item.categoryName}
+                      </Button>
+                    </Grid>
+                  ))
+                : null}
             </Grid>
           </div>
         </Container>

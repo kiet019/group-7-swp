@@ -1,8 +1,4 @@
 import { auth } from "@/config/firebase"
-
-export const createCartApi =async () => {
-    // tạo cart bằng userUid
-}
 export const getCartProductByUserUidApi =async () => {
     const response = await fetch(`http://localhost:8080/api/cart/getCartProductByUserUid?userUid=${auth.currentUser?.uid}`)
     if (response.ok) {

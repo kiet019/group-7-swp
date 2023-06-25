@@ -19,7 +19,7 @@ export default function SearchBox() {
             borderRadius: "1rem",
             backgroundColor: setup.color,
           },
-          width: "30rem",
+          maxidth: "30rem",
         }}
         InputProps={{
           startAdornment: (
